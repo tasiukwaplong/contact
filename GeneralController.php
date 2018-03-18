@@ -60,8 +60,6 @@ public function renderView($type, $msg){
 
        require "footerContent.html";
   	}
-
-
 } 
 
 

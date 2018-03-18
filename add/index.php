@@ -1,18 +1,26 @@
 <?php
 include "../GeneralController.php";
+if (isset($_GET['cname']) && isset($_GET['cphone']) && isset($_GET['t']) && !empty($_GET['cname']) && !empty($_GET['cphone']) && !empty($_GET['t'])) {
  $contactName = $_GET['cname'];
  $contactPhone =$_GET['cphone'];
- $usedInterface = $_GET['t']; 
+ $usedInterface = $_GET['t'];  
+}else{
+$contactName = '';
+ $contactPhone ='';
+ $usedInterface = 'a';
+}
+
+  
 
  $newContact = new GeneralController($contactName, $contactPhone, $usedInterface);
 
- $contactName = $newContact->input_filter($_GET['cname']);
- $contactPhone = $newContact->input_filter($_GET['cphone']);
- $usedInterface = $newContact->input_filter($_GET['t']); 
+ $contactName = $newContact->input_filter($contactName);
+ $contactPhone = $newContact->input_filter($contactPhone);
+ $usedInterface = $newContact->input_filter($usedInterface); 
 
  if($contactPhone == "data_empty_for_input" || $contactName == "data_empty_for_input" || $usedInterface == "data_empty_for_input"){
  	//when either of the inputs is wrong
- 	$retVal = ($usedInterface == 'f') ? 'error' : array('message' => 'error', 'info' => 'unable to insert', 'hint'=> 'possible input error or api request not correct');
+ 	$retVal = array('message' => 'error', 'info' => 'unable to insert', 'hint'=> 'pass the http url as such ?cname=contact_name&cphone=phone_num&t=a');
  	$newContact->errHandle($usedInterface, $retVal);
  }else{
  	add();

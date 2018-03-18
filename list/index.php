@@ -10,6 +10,8 @@ if (isset($_GET['cinfo']) && isset($_GET['t']) && !empty($_GET['cinfo']) && !emp
   $usedInterface = 'a';
 }
 
+  
+
   $searchContact = new GeneralController('', $contactInfo, $usedInterface);
 
  //$contactName = $searchContact->input_filter($_GET['cname']);
@@ -38,7 +40,7 @@ if (isset($_GET['cinfo']) && isset($_GET['t']) && !empty($_GET['cinfo']) && !emp
     $retVal = ($usedInterface == 'f') ?   $searchContact->renderView($usedInterface, $retInfo) : $searchContact->renderView($usedInterface, array('message' => 'success', 'info' => $retInfo));
    
   }else{
-    $retVal = ($usedInterface == 'f') ? array('message' => 'error', 'info' => 'Contact not found', 'hint' => 'Try searching using either a name or number') : array('message' => 'error', 'info' => 'Contact not found', 'hint' => 'Try searching using either a name or number');
+    $retVal = ($usedInterface == 'f') ? array('message' => 'error', 'info' => 'Contact not found', 'hint' => 'Try searching using either a name or number') : array('message' => 'error', 'info' => 'Contact not found', 'hint' => 'Try searching using either a name or number or see all contacts with url: ?t=a&showall');
     $searchContact->errHandle($usedInterface, $retVal);
  }
 
